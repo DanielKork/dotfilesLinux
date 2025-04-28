@@ -1,0 +1,16 @@
+# Move files to trash instead of deleting
+trash() {
+  mkdir -p ~/.trash
+  mv "$@" ~/.trash/
+}
+
+# Restore a file from trash
+restore() {
+  file="$1"
+  if [ -f "$HOME/.trash/$file" ]; then
+    mv "$HOME/.trash/$file" .
+    echo "✅ Restored $file"
+  else
+    echo "❌ File not found."
+  fi
+}

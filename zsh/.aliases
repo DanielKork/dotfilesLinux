@@ -1,0 +1,14 @@
+# Common Shortcuts
+alias ll='ls -la --color=auto'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias grep='grep --color=auto'
+
+# Fuzzy Finder Aliases
+alias hist='history | fzf'
+alias cdf='cd $(find . -type d | fzf)'
+alias cz='cd $(zoxide query -l | fzf)'
+
+# Quick Edit & Reload
+alias edp='nano ~/dotfiles/zsh/.zshrc'
+alias src='source ~/.zshrc'
