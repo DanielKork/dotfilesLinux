@@ -1,6 +1,6 @@
 🔥 If you move to a new machine:
 
-git clone https://github.com/your-username/dotfiles.git ~/dotfiles
+git clone https://github.com/DanielKork/dotfilesLinux.git ~/dotfiles
 cd ~/dotfiles
 ./setup.sh
 
