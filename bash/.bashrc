@@ -3,9 +3,6 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# Load FZF keybindings if available
-[ -f ~/dotfiles/fzf/fzf.bash ] && source ~/dotfiles/fzf/fzf.bash
-
 # Load Zoxide if available
 [ -f ~/dotfiles/zoxide/zoxide.bash ] && source ~/dotfiles/zoxide/zoxide.bash
 
