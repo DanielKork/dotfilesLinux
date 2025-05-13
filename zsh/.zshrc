@@ -19,6 +19,7 @@ source ~/dotfiles/zsh/.zshenv
 # Load Zoxide if available
 [ -f ~/dotfiles/zoxide/zoxide.bash ] && source ~/dotfiles/zoxide/zoxide.bash
 
+
 # Fancy prompt
 autoload -Uz colors && colors
 PROMPT="%F{green}%n%f@%F{blue}%~%f %# "

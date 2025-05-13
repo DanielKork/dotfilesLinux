@@ -14,3 +14,8 @@ restore() {
     echo "❌ File not found."
   fi
 }
+
+
+dotedit() {
+  nano "$(find ~/dotfiles -type f | fzf)"
+}

@@ -4,6 +4,17 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias grep='grep --color=auto'
 
+# 🔁 Rename a file (interactive)
+alias ren='mv -i'
+
+# 🗑️ Safer delete - use trash function
+alias del='trash'
+
+# 🛑 Force delete (with confirmation)
+alias del!='rm -i'
+
+
+
 # Fuzzy Finder Aliases
 alias hist='history | fzf'
 alias cdf='cd $(find . -type d | fzf)'
