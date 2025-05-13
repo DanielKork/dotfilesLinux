@@ -20,6 +20,11 @@ alias hist='history | fzf'
 alias cdf='cd $(find . -type d | fzf)'
 alias cz='cd $(zoxide query -l | fzf)'
 
+#alias opena='gtk-launch "$(ls /usr/share/applications | sed 's/\.desktop$//' | fzf)"'
+
+
+
+
 # Quick Edit & Reload
 alias edp='nano ~/dotfiles/zsh/.zshrc'
 alias src='source ~/.zshrc'

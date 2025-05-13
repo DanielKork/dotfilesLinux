@@ -8,3 +8,5 @@
   ci = commit
   st = status
   lg = log --oneline --graph --all --decorate
+[credential]
+	helper = cache

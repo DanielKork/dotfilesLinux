@@ -16,6 +16,36 @@ restore() {
 }
 
 
-dotedit() {
-  nano "$(find ~/dotfiles -type f | fzf)"
+editf() {
+#  nano "$(find ~/dotfiles -type f | fzf)"
+   nvim "$(find ~/dotfiles -type f | fzf)" 
 }
+
+
+#openapp() {
+#  local app
+#  app=$(ls /usr/share/applications ~/.local/share/applications 2>/dev/null | sed 's/\.desktop$//' | fzf)
+#  [ -n "$app" ] && gtk-launch "$app"
+#}
+openapp() {
+  local app
+  app=$(ls /usr/share/applications ~/.local/share/applications 2>/dev/null | sed 's/\.desktop$//' | fzf)
+  [ -n "$app" ] && gtk-launch "$app" >/dev/null 2>&1 &
+}
+
+
+
+openapp_widget() {
+  zle -I                # Disable current input
+  openapp               # Call your fuzzy launcher
+  zle reset-prompt      # Refresh prompt after
+}
+zle -N openapp_widget    # Register as a widget
+
+editfile_widget() {
+  zle -I                # Disable current input
+  editf               # Call your fuzzy launcher
+  zle reset-prompt      # Refresh prompt after
+}
+zle -N editfile_widget    # Register as a widget
+

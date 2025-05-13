@@ -19,6 +19,9 @@ source ~/dotfiles/zsh/.zshenv
 # Load Zoxide if available
 [ -f ~/dotfiles/zoxide/zoxide.bash ] && source ~/dotfiles/zoxide/zoxide.bash
 
+bindkey '^o' openapp_widget
+bindkey '^e' editfile_widget
+
 
 # Fancy prompt
 autoload -Uz colors && colors
