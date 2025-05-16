@@ -3,6 +3,9 @@
 # Go into scripts folder
 cd ~/dotfiles/scripts
 
+# Source the install.sh file to use its functions
+source ./install.sh
+
 # Backup old configs
 ./backup.sh
 
