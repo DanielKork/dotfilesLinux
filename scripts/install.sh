@@ -58,26 +58,26 @@ install_dependencies() {
 }
 
 
-setup_zsh() {
+#setup_zsh() {
   # Check if zsh is installed
-  if ! command -v zsh >/dev/null 2>&1; then
-    echo "🐚 Installing Zsh..."
-    if [ "$OS" = "mac" ]; then
-      brew install zsh
-    elif [ "$OS" = "linux" ]; then
-      sudo apt install -y zsh
-    fi
-  fi
+#  if ! command -v zsh >/dev/null 2>&1; then
+#    echo "🐚 Installing Zsh..."
+#   if [ "$OS" = "mac" ]; then
+#      brew install zsh
+#    elif [ "$OS" = "linux" ]; then
+#      sudo apt install -y zsh
+#    fi
+#  fi
 
   # Set Zsh as default shell if it's not already
-  if [ "$SHELL" != "$(which zsh)" ]; then
-    echo "💡 Setting Zsh as default shell..."
-    chsh -s "$(which zsh)" "$USER"
-    echo "✅ Zsh will be your default shell next time you log in."
-  else
-    echo "✔️ Zsh is already your default shell."
-  fi
-}
+#  if [ "$SHELL" != "$(which zsh)" ]; then
+#    echo "💡 Setting Zsh as default shell..."
+#    chsh -s "$(which zsh)" "$USER"
+#    echo "✅ Zsh will be your default shell next time you log in."
+#  else
+#    echo "✔️ Zsh is already your default shell."
+#  fi
+#}
 
 
 
