@@ -12,7 +12,7 @@ source ./install.sh
 # Install new configs
 ./install.sh
 install_dependencies
-#setup_zsh
+setup_zsh
 
 
 # Reload the shell
