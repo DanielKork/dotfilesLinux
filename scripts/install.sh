@@ -20,6 +20,14 @@ ln -sf ~/dotfiles/git/.gitconfig ~/.gitconfig
 
 echo "✅ Dotfiles linked successfully!"
 
+# First: define detect_os
+detect_os() {
+  case "$(uname -s)" in
+    Linux*)  echo linux;;
+    Darwin*) echo mac;;
+    *)       echo unknown;;
+  esac
+}
 
 install_dependencies() {
   OS=$(detect_os)
