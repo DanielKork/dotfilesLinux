@@ -16,9 +16,9 @@ install_dependencies
 
 
 # Reload the shell
-#if command -v zsh >/dev/null && [ "$SHELL" != "$(which zsh)" ]; then
-#  echo "🔁 Reloading shell into Zsh..."
-#  exec zsh
-#fi
-echo "🔄 Reloading the shell..."
-exec $SHELL -l
+if command -v zsh >/dev/null && [ "$SHELL" != "$(which zsh)" ]; then
+  echo "🔁 Reloading shell into Zsh..."
+  exec zsh
+fi
+#echo "🔄 Reloading the shell..."
+#exec $SHELL -l
