@@ -37,9 +37,13 @@ install_dependencies() {
   if [ "$OS" = "mac" ]; then
     # macOS: use Homebrew
     command -v brew >/dev/null 2>&1 || {
-      echo "🍺 Installing Homebrew..."
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    }
+     echo "🍺 Installing Homebrew..."
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+	# Load Homebrew path into current shell (very important!)
+	echo "🔁 Adding Homebrew to PATH..."
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+
 
     brew install fzf neovim
     /opt/homebrew/opt/fzf/install --all --no-bash --no-fish
