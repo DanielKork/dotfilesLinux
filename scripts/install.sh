@@ -42,6 +42,8 @@ install_dependencies() {
 
 	# Load Homebrew path into current shell (very important!)
 	echo "🔁 Adding Homebrew to PATH..."
+	echo "🔁 Ensuring /opt/homebrew/bin is in PATH"
+	echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.zshrc
 	eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
 

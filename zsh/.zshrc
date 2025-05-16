@@ -1,6 +1,9 @@
 # Load Zsh Environment
 source ~/dotfiles/zsh/.zshenv
 
+# Apple Silicon Homebrew fix
+export PATH="/opt/homebrew/bin:$PATH"
+
 # Load Exports
 [ -f ~/dotfiles/zsh/.exports ] && source ~/dotfiles/zsh/.exports
 
