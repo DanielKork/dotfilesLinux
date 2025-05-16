@@ -36,7 +36,7 @@ install_dependencies() {
 
   if [ "$OS" = "mac" ]; then
     # macOS: use Homebrew
-    command -v brew >/dev/null 2>&1 || {
+    command -v brew >/dev/null 2>&1 || then
      echo "🍺 Installing Homebrew..."
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
@@ -46,7 +46,7 @@ install_dependencies() {
   fi
 
   echo "📦 Installing fzf, neovim, and zsh..."
-  brew install fzf neovim zsh
+  brew install fzf neovim
 
   echo "🔗 Installing FZF keybindings..."
   $(brew --prefix)/opt/fzf/install --all --no-bash --no-fish
