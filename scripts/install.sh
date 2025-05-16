@@ -36,7 +36,7 @@ install_dependencies() {
 
   if [ "$OS" = "mac" ]; then
     # macOS: use Homebrew
-    command -v brew >/dev/null 2>&1 || then
+    if ! command -v brew >/dev/null 2>&1; then
      echo "🍺 Installing Homebrew..."
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
