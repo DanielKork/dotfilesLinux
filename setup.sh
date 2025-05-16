@@ -8,7 +8,14 @@ cd ~/dotfiles/scripts
 
 # Install new configs
 ./install.sh
+install_dependencies
+setup_zsh
+
 
 # Reload the shell
-echo "🔄 Reloading the shell..."
-exec $SHELL -l
+if command -v zsh >/dev/null && [ "$SHELL" != "$(which zsh)" ]; then
+  echo "🔁 Reloading shell into Zsh..."
+  exec zsh
+fi
+#echo "🔄 Reloading the shell..."
+#exec $SHELL -l
