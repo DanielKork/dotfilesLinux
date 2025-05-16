@@ -43,13 +43,13 @@ install_dependencies() {
 	# Load Homebrew path into current shell (very important!)
 	echo "🔁 Adding Homebrew to PATH..."
 	eval "$(/opt/homebrew/bin/brew shellenv)"
+  fi
 
+  echo "📦 Installing fzf, neovim, and zsh..."
+  brew install fzf neovim zsh
 
-    	echo "📦 Installing fzf, neovim, and zsh..."
-  	brew install fzf neovim zsh
-
-  	echo "🔗 Installing FZF keybindings..."
-  	$(brew --prefix)/opt/fzf/install --all --no-bash --no-fish
+  echo "🔗 Installing FZF keybindings..."
+  $(brew --prefix)/opt/fzf/install --all --no-bash --no-fish
 
   elif [ "$OS" = "linux" ]; then
     # Ubuntu/Debian
