@@ -19,6 +19,9 @@ source ~/dotfiles/zsh/.zshenv
 # Load Zoxide if available
 [ -f ~/dotfiles/zoxide/zoxide.bash ] && source ~/dotfiles/zoxide/zoxide.bash
 
+# Apple Silicon Homebrew support
+[ -d /opt/homebrew/bin ] && export PATH="/opt/homebrew/bin:$PATH"
+
 bindkey '^o' openapp_widget
 bindkey '^e' editfile_widget
 

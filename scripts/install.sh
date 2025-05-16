@@ -45,8 +45,11 @@ install_dependencies() {
 	eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
-    brew install fzf neovim
-    /opt/homebrew/opt/fzf/install --all --no-bash --no-fish
+    	echo "📦 Installing fzf, neovim, and zsh..."
+  	brew install fzf neovim zsh
+
+  	echo "🔗 Installing FZF keybindings..."
+  	$(brew --prefix)/opt/fzf/install --all --no-bash --no-fish
 
   elif [ "$OS" = "linux" ]; then
     # Ubuntu/Debian
