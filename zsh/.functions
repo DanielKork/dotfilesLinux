@@ -44,7 +44,7 @@ zle -N openapp_widget    # Register as a widget
 
 editfile_widget() {
   zle -I                # Disable current input
-  editf               # Call your fuzzy launcher
+  edif               # Call your fuzzy launcher
   zle reset-prompt      # Refresh prompt after
 }
 zle -N editfile_widget    # Register as a widget

@@ -26,7 +26,7 @@ export PATH="/opt/homebrew/bin:$PATH"
 [ -d /opt/homebrew/bin ] && export PATH="/opt/homebrew/bin:$PATH"
 
 bindkey '^o' openapp_widget
-bindkey '^e' editfile_widget
+bindkey '^a' editfile_widget
 
 
 # Fancy prompt
