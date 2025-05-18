@@ -48,7 +48,7 @@ editfile_widget() {
 }
 zle -N editfile_widget    # Register as a widget
 
-
+#Git add . + git commit -m " "
 gac() {
   git add .
   echo -n "📝 Commit message: "
