@@ -4,9 +4,11 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias grep='grep --color=auto'
 
-#git shortcuts
+#git shortcuts:
 # Push to current branch
 alias gpu='git push'
+# Push all branches
+alias gpa='git push --all'
 
 # 🔁 Rename a file (interactive)
 alias ren='mv -i'
