@@ -4,6 +4,10 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias grep='grep --color=auto'
 
+#git shortcuts
+# Push to current branch
+alias gpu='git push'
+
 # 🔁 Rename a file (interactive)
 alias ren='mv -i'
 
@@ -14,15 +18,12 @@ alias del='trash'
 alias del!='rm -i'
 
 
-
 # Fuzzy Finder Aliases
 alias hist='history | fzf'
 alias cdf='cd $(find . -type d | fzf)'
 alias cz='cd $(zoxide query -l | fzf)'
 
 #alias opena='gtk-launch "$(ls /usr/share/applications | sed 's/\.desktop$//' | fzf)"'
-
-
 
 
 # Quick Edit & Reload
