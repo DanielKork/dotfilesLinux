@@ -64,3 +64,10 @@ gacp() {
   git push
 }
 
+
+gmergef() {
+  local branch
+  branch=$(git branch --all | grep -v HEAD | sed 's/remotes\///' | sed 's/\* //' | fzf)
+  [ -n "$branch" ] && git merge "${branch##*/}"
+}
+
