@@ -27,10 +27,29 @@ edif() {
 #  app=$(ls /usr/share/applications ~/.local/share/applications 2>/dev/null | sed 's/\.desktop$//' | fzf)
 #  [ -n "$app" ] && gtk-launch "$app"
 #}
+#openapp() {
+#  local app
+#  app=$(ls /usr/share/applications ~/.local/share/applications 2>/dev/null | sed 's/\.desktop$//' | fzf)
+#  [ -n "$app" ] && gtk-launch "$app" >/dev/null 2>&1 &
+#}
 openapp() {
-  local app
-  app=$(ls /usr/share/applications ~/.local/share/applications 2>/dev/null | sed 's/\.desktop$//' | fzf)
-  [ -n "$app" ] && gtk-launch "$app" >/dev/null 2>&1 &
+  local os app
+
+  os=$(uname -s)
+
+  if [[ "$os" == "Darwin" ]]; then
+    # macOS: use /Applications
+    app=$(find /Applications ~/Applications -type d -name "*.app" | sed 's:.*/::; s/\.app$//' | sort -u | fzf --prompt="Launch App: ")
+    [ -n "$app" ] && open -a "$app"
+
+  elif [[ "$os" == "Linux" ]]; then
+    # Linux: use .desktop entries
+    app=$(ls /usr/share/applications ~/.local/share/applications 2>/dev/null | sed 's/\.desktop$//' | sort -u | fzf --prompt="Launch App: ")
+    [ -n "$app" ] && gtk-launch "$app" >/dev/null 2>&1 &
+  
+  else
+    echo "❌ Unsupported OS: $os"
+  fi
 }
 
 
