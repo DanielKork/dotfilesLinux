@@ -47,8 +47,8 @@ install_dependencies() {
 	eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
 
-  echo "📦 Installing fzf, neovim..."
-  brew install fzf neovim
+  echo "📦 Installing fzf, neovim and zoxide..."
+  brew install fzf neovim zoxide
 
   echo "🔗 Installing FZF keybindings..."
   $(brew --prefix)/opt/fzf/install --all --no-bash --no-fish
