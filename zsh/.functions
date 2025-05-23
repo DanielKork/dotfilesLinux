@@ -32,52 +32,12 @@ edif() {
 #  app=$(ls /usr/share/applications ~/.local/share/applications 2>/dev/null | sed 's/\.desktop$//' | fzf)
 #  [ -n "$app" ] && gtk-launch "$app" >/dev/null 2>&1 &
 #}
-#openapp() {
-#  local os app
-
-#  os=$(uname -s)
-
-#  if [[ "$os" == "Darwin" ]]; then
-#    echo "🖥 macOS detected"
-
-#    app=$(find /Applications ~/Applications -maxdepth 1 -type d -name "*.app" \
-#      | sed 's:.*/::; s/\.app$//' | sort -u | fzf --prompt="Launch App: ")
-
-#    if [[ -n "$app" ]]; then
-#      echo "🚀 Launching $app"
-#      open -a "$app"
-#    else
-#      echo "❌ No app selected"
-#    fi
-
-#  elif [[ "$os" == "Linux" ]]; then
-#  echo "🐧 Linux detected"
-
-#    app=$(ls /usr/share/applications ~/.local/share/applications 2>/dev/null \
-#      | sed 's/\.desktop$//' | sort -u | fzf --prompt="Launch App: ")
-
-#    if [[ -n "$app" ]]; then
-#      echo "🚀 Launching $app"
-#      gtk-launch "$app" >/dev/null 2>&1 &
-#    else
-#      echo "❌ No app selected"
-#    fi
-
-#  else
-#    echo "❌ Unsupported OS: $os"
-#  fi
-#}
-
 openapp() {
   local os
   os=$(uname -s)
 
   if [[ "$os" == "Darwin" ]]; then
-<<<<<<< HEAD
-    # macOS
-=======
     # macOS GUI picker
->>>>>>> TestEnv
     nohup osascript <<EOF >/dev/null 2>&1 &
       set appList to paragraphs of (do shell script "ls /Applications | grep \\.app | sed 's/\\.app$//'")
       set selectedApp to choose from list appList with prompt "Launch an app:" default items {"Safari"} without multiple selections allowed and empty selection allowed
@@ -87,15 +47,6 @@ openapp() {
 EOF
 
   elif [[ "$os" == "Linux" ]]; then
-<<<<<<< HEAD
-    # Wayland fix: use wofi, not rofi
-    wofi --show dmenu --prompt "Launch App:" --allow-markup < <(
-      find /usr/share/applications ~/.local/share/applications -type f -name '*.desktop' 2>/dev/null \
-      | sed 's:.*/::' | sed 's/\.desktop$//' | sort -u
-    ) | while read -r app; do
-      gtk-launch "$app" >/dev/null 2>&1 &
-    done
-=======
     # Linux + Wayland: Wofi launcher with ALL desktop entries
     {
       find /usr/share/applications \
@@ -111,7 +62,6 @@ EOF
       | while read -r app; do
         gtk-launch "$app" >/dev/null 2>&1 &
       done
->>>>>>> TestEnv
 
   else
     echo "❌ Unsupported OS: $os"
@@ -120,12 +70,6 @@ EOF
 
 
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> TestEnv
 openapp_widget() {
   zle -I                # Disable current input
   openapp               # Call your fuzzy launcher
@@ -163,4 +107,3 @@ gmergef() {
   branch=$(git branch --all | grep -v HEAD | sed 's/remotes\///' | sed 's/\* //' | fzf)
   [ -n "$branch" ] && git merge "${branch##*/}"
 }
-
