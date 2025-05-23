@@ -37,8 +37,15 @@ openapp() {
   os=$(uname -s)
 
   if [[ "$os" == "Darwin" ]]; then
-    # macOS GUI picker
-    app=$(ls /Applications | grep '\.app' | sed 's/\.app$//' | sort | choose --prompt "Launch App:")
+    # macOS: use choose with argument list
+    mapfile -t apps < <(ls /Applications | grep '\.app' | sed 's/\.app$//' | sort)
+
+    if [[ ${#apps[@]} -eq 0 ]]; then
+      echo "❌ No apps found"
+      return 1
+    fi
+
+    app=$(choose -p "Launch App:" "${apps[@]}")
     if [[ -n "$app" ]]; then
       open -a "$app"
     fi
