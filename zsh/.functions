@@ -38,14 +38,10 @@ openapp() {
 
   if [[ "$os" == "Darwin" ]]; then
     # macOS GUI picker
-    osascript >/dev/null 2>&1 <<'EOF' &
-      set appList to paragraphs of (do shell script "ls /Applications | grep \\.app | sed 's/\\.app$//'")
-      if (count of appList) = 0 then return
-      set selectedApp to choose from list appList with prompt "Launch an app:" default items {"Safari"} without multiple selections allowed and empty selection allowed
-      if selectedApp is not false then
-        do shell script "open -a " & quoted form of selectedApp
-      end if
-EOF
+    app=$(ls /Applications | grep '\.app' | sed 's/\.app$//' | sort | choose --prompt "Launch App:")
+    if [[ -n "$app" ]]; then
+      open -a "$app"
+    fi
 
   elif [[ "$os" == "Linux" ]]; then
     # Linux + Wayland: Wofi launcher with ALL desktop entries
