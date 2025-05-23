@@ -38,15 +38,31 @@ openapp() {
   os=$(uname -s)
 
   if [[ "$os" == "Darwin" ]]; then
-    # macOS: use /Applications
-    app=$(find /Applications ~/Applications -type d -name "*.app" | sed 's:.*/::; s/\.app$//' | sort -u | fzf --prompt="Launch App: ")
-    [ -n "$app" ] && open -a "$app"
+    echo "🖥 macOS detected"
+
+    app=$(find /Applications ~/Applications -maxdepth 1 -type d -name "*.app" \
+      | sed 's:.*/::; s/\.app$//' | sort -u | fzf --prompt="Launch App: ")
+
+    if [[ -n "$app" ]]; then
+      echo "🚀 Launching $app"
+      open -a "$app"
+    else
+      echo "❌ No app selected"
+    fi
 
   elif [[ "$os" == "Linux" ]]; then
-    # Linux: use .desktop entries
-    app=$(ls /usr/share/applications ~/.local/share/applications 2>/dev/null | sed 's/\.desktop$//' | sort -u | fzf --prompt="Launch App: ")
-    [ -n "$app" ] && gtk-launch "$app" >/dev/null 2>&1 &
-  
+    echo "🐧 Linux detected"
+
+    app=$(ls /usr/share/applications ~/.local/share/applications 2>/dev/null \
+      | sed 's/\.desktop$//' | sort -u | fzf --prompt="Launch App: ")
+
+    if [[ -n "$app" ]]; then
+      echo "🚀 Launching $app"
+      gtk-launch "$app" >/dev/null 2>&1 &
+    else
+      echo "❌ No app selected"
+    fi
+
   else
     echo "❌ Unsupported OS: $os"
   fi
