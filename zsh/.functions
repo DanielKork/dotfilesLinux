@@ -37,18 +37,14 @@ openapp() {
   os=$(uname -s)
 
   if [[ "$os" == "Darwin" ]]; then
-  # macOS: use choose with argument list
-    mapfile -t apps < <(ls /Applications | grep '\.app' | sed 's/\.app$//' | sort)
-
-    if [[ ${#apps[@]} -eq 0 ]]; then
-      echo "❌ No apps found"
-      return 1
-    fi
+  # macOS: Collect apps into an array manually (Zsh-compatible)
+    local apps=()
+    for app_path in /Applications/*.app; do
+      apps+=("${app_path:t:r}")
+    done
 
     app=$(choose -p "Launch App:" "${apps[@]}")
-    if [[ -n "$app" ]]; then
-      open -a "$app"
-    fi
+    [[ -n "$app" ]] && open -a "$app"
 
 #    # ✅ Fixed AppleScript: GUI app picker
 #    osascript >/dev/null 2>&1 <<'EOF' &
