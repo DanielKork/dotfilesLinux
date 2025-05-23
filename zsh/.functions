@@ -69,12 +69,15 @@ edif() {
 #}
 
 openapp() {
-  local os app
-
+  local os
   os=$(uname -s)
 
   if [[ "$os" == "Darwin" ]]; then
+<<<<<<< HEAD
     # macOS
+=======
+    # macOS GUI picker
+>>>>>>> TestEnv
     nohup osascript <<EOF >/dev/null 2>&1 &
       set appList to paragraphs of (do shell script "ls /Applications | grep \\.app | sed 's/\\.app$//'")
       set selectedApp to choose from list appList with prompt "Launch an app:" default items {"Safari"} without multiple selections allowed and empty selection allowed
@@ -84,6 +87,7 @@ openapp() {
 EOF
 
   elif [[ "$os" == "Linux" ]]; then
+<<<<<<< HEAD
     # Wayland fix: use wofi, not rofi
     wofi --show dmenu --prompt "Launch App:" --allow-markup < <(
       find /usr/share/applications ~/.local/share/applications -type f -name '*.desktop' 2>/dev/null \
@@ -91,6 +95,23 @@ EOF
     ) | while read -r app; do
       gtk-launch "$app" >/dev/null 2>&1 &
     done
+=======
+    # Linux + Wayland: Wofi launcher with ALL desktop entries
+    {
+      find /usr/share/applications \
+           ~/.local/share/applications \
+           ~/.local/share/flatpak/exports/share/applications \
+           /var/lib/flatpak/exports/share/applications \
+           /var/lib/snapd/desktop/applications \
+           -type f -name '*.desktop' 2>/dev/null \
+      | sed 's:.*/::' \
+      | sed 's/\.desktop$//' \
+      | sort -u
+    } | wofi --show dmenu --prompt "Launch App:" --allow-markup \
+      | while read -r app; do
+        gtk-launch "$app" >/dev/null 2>&1 &
+      done
+>>>>>>> TestEnv
 
   else
     echo "❌ Unsupported OS: $os"
@@ -99,9 +120,12 @@ EOF
 
 
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> TestEnv
 openapp_widget() {
   zle -I                # Disable current input
   openapp               # Call your fuzzy launcher
