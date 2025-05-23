@@ -37,20 +37,10 @@ openapp() {
   os=$(uname -s)
 
   if [[ "$os" == "Darwin" ]]; then
-  # 🍏 macOS: Use `choose` to pick from /Applications
-    local app_list=()
-    for fullpath in /Applications/*.app; do
-      [[ -d "$fullpath" ]] && app_list+=("${fullpath:t:r}")
-    done
-
-    # Show choose GUI
-    app=$(choose -p "Launch App:" $app_list)
-
+  # macOS: use choose for live filtering
+    app=$(ls /Applications | grep '\.app' | sed 's/\.app$//' | sort | choose --prompt "Launch App:")
     if [[ -n "$app" ]]; then
-      echo "🚀 Launching $app"
       open -a "$app"
-    else
-      echo "❌ No app selected"
     fi
 
 #    # ✅ Fixed AppleScript: GUI app picker
