@@ -33,40 +33,41 @@ edif() {
 #  [ -n "$app" ] && gtk-launch "$app" >/dev/null 2>&1 &
 #}
 openapp() {
-  local os app
-
+  local os
   os=$(uname -s)
 
   if [[ "$os" == "Darwin" ]]; then
-    echo "🖥 macOS detected"
-
-    app=$(find /Applications ~/Applications -maxdepth 1 -type d -name "*.app" \
-      | sed 's:.*/::; s/\.app$//' | sort -u | fzf --prompt="Launch App: ")
-
-    if [[ -n "$app" ]]; then
-      echo "🚀 Launching $app"
-      open -a "$app"
-    else
-      echo "❌ No app selected"
-    fi
+    # macOS GUI picker
+    nohup osascript <<EOF >/dev/null 2>&1 &
+      set appList to paragraphs of (do shell script "ls /Applications | grep \\.app | sed 's/\\.app$//'")
+      set selectedApp to choose from list appList with prompt "Launch an app:" default items {"Safari"} without multiple selections allowed and empty selection allowed
+      if selectedApp is not false then
+        do shell script "open -a " & quoted form of selectedApp
+      end if
+EOF
 
   elif [[ "$os" == "Linux" ]]; then
-    echo "🐧 Linux detected"
-
-    app=$(ls /usr/share/applications ~/.local/share/applications 2>/dev/null \
-      | sed 's/\.desktop$//' | sort -u | fzf --prompt="Launch App: ")
-
-    if [[ -n "$app" ]]; then
-      echo "🚀 Launching $app"
-      gtk-launch "$app" >/dev/null 2>&1 &
-    else
-      echo "❌ No app selected"
-    fi
+    # Linux + Wayland: Wofi launcher with ALL desktop entries
+    {
+      find /usr/share/applications \
+           ~/.local/share/applications \
+           ~/.local/share/flatpak/exports/share/applications \
+           /var/lib/flatpak/exports/share/applications \
+           /var/lib/snapd/desktop/applications \
+           -type f -name '*.desktop' 2>/dev/null \
+      | sed 's:.*/::' \
+      | sed 's/\.desktop$//' \
+      | sort -u
+    } | wofi --show dmenu --prompt "Launch App:" --allow-markup \
+      | while read -r app; do
+        gtk-launch "$app" >/dev/null 2>&1 &
+      done
 
   else
     echo "❌ Unsupported OS: $os"
   fi
 }
+
 
 
 openapp_widget() {
