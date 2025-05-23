@@ -37,14 +37,21 @@ openapp() {
   os=$(uname -s)
 
   if [[ "$os" == "Darwin" ]]; then
-    # macOS: Collect apps into an array manually (Zsh-compatible)
-    local apps=()
-    for app_path in /Applications/*.app; do
-      apps+=("${app_path:t:r}")
+    # 🍏 macOS: Use `choose` to pick from /Applications
+    local app_list=()
+    for fullpath in /Applications/*.app; do
+      [[ -d "$fullpath" ]] && app_list+=("${fullpath:t:r}")
     done
 
-    app=$(choose -p "Launch App:" "${apps[@]}")
-    [[ -n "$app" ]] && open -a "$app"
+    # Show choose GUI
+    app=$(choose -p "Launch App:" $app_list)
+
+    if [[ -n "$app" ]]; then
+      echo "🚀 Launching $app"
+      open -a "$app"
+    else
+      echo "❌ No app selected"
+    fi
 
   elif [[ "$os" == "Linux" ]]; then
     # Linux + Wayland: Wofi launcher with ALL desktop entries
