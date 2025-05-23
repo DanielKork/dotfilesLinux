@@ -28,7 +28,6 @@ export PATH="/opt/homebrew/bin:$PATH"
 bindkey '^o' openapp_widget
 bindkey '^a' editfile_widget
 
-
 # Fancy prompt
 autoload -Uz colors && colors
 PROMPT="%F{green}%n%f@%F{blue}%~%f %# "
