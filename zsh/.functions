@@ -38,14 +38,14 @@ openapp() {
 
   if [[ "$os" == "Darwin" ]]; then
     # ✅ Fixed AppleScript: GUI app picker
-    osascript >/dev/null 2>&1 <<'EOF' &
-      set appList to paragraphs of (do shell script "ls /Applications | grep \\.app | sed 's/\\.app$//'")
-      if (count of appList) = 0 then return
-      set selectedApp to choose from list appList with prompt "Launch an app:" default items {"Safari"} without multiple selections allowed and empty selection allowed
-      if selectedApp is not false then
-        do shell script "open -a " & quoted form of selectedApp
-      end if
-EOF
+    osascript <<'APPLESCRIPT'
+    set appList to paragraphs of (do shell script "ls /Applications | grep \\.app | sed 's/\\.app$//'")
+    set selectedApp to choose from list appList with prompt "Launch an app:" default items {"Safari"} without multiple selections allowed and empty selection allowed
+    if selectedApp is not false then
+      set appPath to "/Applications/" & selectedApp & ".app"
+      do shell script "open " & quoted form of appPath
+    end if
+APPLESCRIPT
 
 
   elif [[ "$os" == "Linux" ]]; then
