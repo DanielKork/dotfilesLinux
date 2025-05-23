@@ -55,11 +55,21 @@ install_dependencies() {
 
   elif [ "$OS" = "linux" ]; then
     # Ubuntu/Debian
+    echo "📦 Updating package lists..."
     sudo apt update
-    sudo apt install -y fzf neovim
+
+    echo "📦 Installing required tools..."
+    sudo apt install -y fzf neovim zsh wofi xdg-utils libgtk-3-bin
+
+    echo "🔗 Setting up FZF keybindings..."
+    yes | /usr/share/doc/fzf/examples/install --no-bash --no-fish 2>/dev/null || true
+
+
+    #sudo apt update
+    #sudo apt install -y fzf neovim
 
     # Optional: fzf keybindings
-    yes | /usr/share/doc/fzf/examples/install --no-bash --no-fish
+    #yes | /usr/share/doc/fzf/examples/install --no-bash --no-fish
 
   else
     echo "⚠️ Unsupported OS: $OS"
