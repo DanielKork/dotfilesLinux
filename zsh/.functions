@@ -18,7 +18,7 @@ restore() {
 
 edif() {
 #  nano "$(find ~/dotfiles -type f | fzf)"
-   nvim "$(find ~/dotfiles -type f | fzf)" 
+   nvim "$(find ~/ -type f | fzf)" 
 }
 
 
