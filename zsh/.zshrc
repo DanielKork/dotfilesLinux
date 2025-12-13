@@ -31,3 +31,5 @@ bindkey '^a' editfile_widget
 # Fancy prompt
 autoload -Uz colors && colors
 PROMPT="%F{green}%n%f@%F{blue}%~%f %# "
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

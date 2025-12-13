@@ -9,4 +9,4 @@
   st = status
   lg = log --oneline --graph --all --decorate
 [credential]
-	helper = cache
+	helper = store

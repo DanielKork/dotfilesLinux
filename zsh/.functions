@@ -16,10 +16,35 @@ restore() {
 }
 
 
-edif() {
+#edif() {
 #  nano "$(find ~/dotfiles -type f | fzf)"
-   nvim "$(find ~/ -type f | fzf)" 
+#   nvim "$(find ~/Desktop -type f | fzf)" 
+#    local file
+#    file=$(fd . ~ --type f --hidden --exclude .git --exclude node_modules 2>/dev/null | fzf --prompt="Edit file > ")
+#    [[ -n "$file" ]] && nvim "$file"
+#}
+
+
+
+edif() {
+
+	nvim $(fzf)
+  #local search_root=~/  # 👈 customize this
+  #local search_cmd file
+
+  #if command -v fd &>/dev/null; then
+    #search_cmd="fd . $search_root --type f --hidden --exclude .git --exclude node_modules"
+  #elif command -v fdfind &>/dev/null; then
+    #search_cmd="fdfind . $search_root --type f --hidden --exclude .git --exclude node_modules"
+  #else
+    #search_cmd="find $search_root -type f 2>/dev/null | grep -v -E '/(\.git|node_modules)/'"
+  #fi
+
+  #file=$(eval "$search_cmd" | fzf --prompt="Edit file > ")
+
+  #[[ -n "$file" ]] && nvim "$file"
 }
+
 
 
 #openapp() {

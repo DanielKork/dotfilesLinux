@@ -3,6 +3,7 @@ alias ll='ls -la --color=auto'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias grep='grep --color=auto'
+alias find='ddgr'
 
 # Docker shortcut aliases
 alias d='docker'
