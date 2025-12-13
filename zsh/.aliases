@@ -1,5 +1,5 @@
 # Common Shortcuts
-alias ll='ls -la --color=auto'
+alias ll='ls -l --color=auto'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias grep='grep --color=auto'
